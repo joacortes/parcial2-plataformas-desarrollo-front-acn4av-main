@@ -9,9 +9,12 @@ import Polizas from "./pages/Polizas";
 import Usuarios from "./pages/Usuarios";
 import Menu from "./components/Menu";
 
+import AuthProvider from "./contexts/AuthContext";
+
 function App() {
 
     return (
+      <AuthProvider>
         <BrowserRouter>
             <Menu />
             <Container className="mt-4">
@@ -26,6 +29,7 @@ function App() {
                 </Routes>
             </Container>
         </BrowserRouter>
+      </AuthProvider>
     );
 }
 

@@ -3,11 +3,29 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
 import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 export default function Menu(){
-    return(
+
+        const {
+            isLogueado,
+            logout
+        } = useAuth();
+
+        const navigate = useNavigate();
+
+        const handleLogout = () => {
+            logout();
+            navigate("/login");
+        };
+
+        return(
+        
         <Navbar bg="dark" data-bs-theme="dark" expand="lg"> 
             <Container>
+                
                 <Navbar.Brand as={Link} to="/">
                     SegurosApp
                 </Navbar.Brand>
@@ -20,7 +38,16 @@ export default function Menu(){
                         <Nav.Link as={Link} to="/asegurados">Asegurados</Nav.Link>
                         <Nav.Link as={Link} to="/polizas">Pólizas</Nav.Link>
                         <Nav.Link as={Link} to="/usuarios">Usuarios</Nav.Link>
-                        <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                        {
+                            isLogueado ? 
+                            (
+                                <Button variant="outline-light" onClick={handleLogout}>Cerrar sesión</Button>
+                            )
+                            : 
+                            (
+                                <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                            )
+                        }
                     </Nav>
                 </Navbar.Collapse>
                 
