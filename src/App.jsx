@@ -7,11 +7,13 @@ import Dashboard from "./pages/Dashboard";
 import Asegurados from "./pages/Asegurados";
 import Polizas from "./pages/Polizas";
 import Usuarios from "./pages/Usuarios";
+import Menu from "./components/Menu";
 
 function App() {
 
     return (
         <BrowserRouter>
+            <Menu />
             <Container className="mt-4">
                 <Routes>
                     <Route path="/" element={<Inicio />}/>
