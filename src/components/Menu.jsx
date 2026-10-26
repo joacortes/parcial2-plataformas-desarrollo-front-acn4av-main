@@ -11,6 +11,7 @@ export default function Menu(){
 
         const {
             isLogueado,
+            usuario,
             logout
         } = useAuth();
 
@@ -37,7 +38,13 @@ export default function Menu(){
                         <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
                         <Nav.Link as={Link} to="/asegurados">Asegurados</Nav.Link>
                         <Nav.Link as={Link} to="/polizas">Pólizas</Nav.Link>
-                        <Nav.Link as={Link} to="/usuarios">Usuarios</Nav.Link>
+                        {
+                            usuario?.rol == "admin" && (
+                                <Nav.Link as={Link} to="/usuarios">Usuarios</Nav.Link>
+                            )
+                            
+                        }
+                        
                         {
                             isLogueado ? 
                             (
