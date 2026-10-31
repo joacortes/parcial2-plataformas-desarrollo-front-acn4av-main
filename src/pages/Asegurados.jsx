@@ -8,7 +8,7 @@ import { aseguradosIniciales } from "../data/asegurados";
 
 export default function Asegurados() {
 
-    const [asegurados, setAsegurados] =useState(aseguradosIniciales);
+    const [asegurados, setAsegurados] = useState(aseguradosIniciales);
     const [nombre, setNombre] = useState("");
     const [dni, setDni] = useState("");
     const [email, setEmail] = useState("");
@@ -17,6 +17,15 @@ export default function Asegurados() {
     const agregarAsegurado = (e) => {
 
         e.preventDefault();
+
+        const existeDni = asegurados.find(
+            (asegurado) => asegurado.dni === dni
+        );
+
+        if (existeDni) {
+            alert("Ya existe un asegurado con ese DNI");
+            return;
+        }
 
         const nuevoAsegurado = {
             id: Date.now(),
@@ -38,6 +47,20 @@ export default function Asegurados() {
         setEmail("");
         setTelefono("");
 
+    };
+
+
+    const eliminarAsegurado = (id) => {
+
+        const aseguradosActualizados =
+            asegurados.filter(
+                (asegurado) =>
+                    asegurado.id !== id
+            );
+
+        setAsegurados(
+            aseguradosActualizados
+        );
     };
 
     return (
@@ -66,7 +89,7 @@ export default function Asegurados() {
                     <label className="form-label">Teléfono</label>
                     <input type="text" className="form-control" value={telefono} onChange={(e) => setTelefono(e.target.value)} required/>
                 </div>
-                
+
                 <button type="submit" className="btn btn-primary">Agregar asegurado</button>
             </form>
 
@@ -74,7 +97,7 @@ export default function Asegurados() {
                 {
                     asegurados.map((asegurado) => (
                         <Col md={6} lg={4} key={asegurado.id}>
-                            <AseguradoItem nombre={asegurado.nombre} dni={asegurado.dni} email={asegurado.email} telefono={asegurado.telefono}/>
+                            <AseguradoItem id={asegurado.id} nombre={asegurado.nombre} dni={asegurado.dni} email={asegurado.email} telefono={asegurado.telefono} eliminarAsegurado={eliminarAsegurado}/>
                         </Col>
                     ))
                 }
