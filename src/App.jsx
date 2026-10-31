@@ -11,6 +11,8 @@ import Menu from "./components/Menu";
 
 import AuthProvider from "./contexts/AuthContext";
 import { ProtectedRoute } from "./contexts/ProtectedRoute";
+import { RoleRoute } from "./contexts/RoleRoute";
+
 
 function App() {
 
@@ -25,7 +27,7 @@ function App() {
                     <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}/>
                     <Route path="/asegurados" element={<ProtectedRoute><Asegurados /></ProtectedRoute>}/>
                     <Route path="/polizas" element={<ProtectedRoute><Polizas /></ProtectedRoute>}/>
-                    <Route path="/usuarios" element={<ProtectedRoute><Usuarios /></ProtectedRoute>}/>
+                    <Route path="/usuarios" element={<ProtectedRoute rolPermitido="admin"><Usuarios /></ProtectedRoute>}/>
                     <Route path="*" element={<h1>Error 404</h1>}/>
                 </Routes>
             </Container>

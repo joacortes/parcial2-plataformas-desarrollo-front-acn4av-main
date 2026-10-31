@@ -39,7 +39,7 @@ export default function Menu(){
                         <Nav.Link as={Link} to="/asegurados">Asegurados</Nav.Link>
                         <Nav.Link as={Link} to="/polizas">Pólizas</Nav.Link>
                         {
-                            usuario?.rol == "admin" && (
+                            usuario?.rol === "admin" && (
                                 <Nav.Link as={Link} to="/usuarios">Usuarios</Nav.Link>
                             )
                             
