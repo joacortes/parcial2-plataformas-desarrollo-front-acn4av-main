@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -8,11 +8,29 @@ import { aseguradosIniciales } from "../data/asegurados";
 
 export default function Asegurados() {
 
-    const [asegurados, setAsegurados] = useState(aseguradosIniciales);
+    const [asegurados, setAsegurados] = useState(() => {
+        const aseguradosGuardados = localStorage.getItem("asegurados");
+
+        if (aseguradosGuardados) {
+            return JSON.parse(aseguradosGuardados);
+        }
+
+        return aseguradosIniciales;
+    });
+
+    useEffect(() => {
+        localStorage.setItem(
+            "asegurados",
+            JSON.stringify(asegurados)
+        );
+    }, [asegurados]);
+
     const [nombre, setNombre] = useState("");
     const [dni, setDni] = useState("");
     const [email, setEmail] = useState("");
     const [telefono, setTelefono] = useState("");
+
+    
 
     const agregarAsegurado = (e) => {
 
