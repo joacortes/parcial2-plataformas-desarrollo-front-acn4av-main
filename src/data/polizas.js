@@ -1,0 +1,38 @@
+export const polizasIniciales = [
+    {
+        id: 1,
+        numero: "POL-0001",
+        asegurado: "Ana Gómez",
+        ramo: "Automotor",
+        patente: "AA123BB",
+        marca: "Toyota",
+        modelo: "Corolla",
+        anio: 2022,
+        sumaAsegurada: 20000000,
+        cobertura: "Terceros Completo",
+        tasa: 25,
+        vigenciaDesde: "2026-11-01",
+        vigenciaHasta: "2027-11-01",
+        prima: 500000,
+        comision: 10,
+        estado: "Activa"
+    },
+    {
+        id: 2,
+        numero: "POL-0002",
+        asegurado: "Juan Pérez",
+        ramo: "Automotor",
+        patente: "AB456CD",
+        marca: "Volkswagen",
+        modelo: "Polo",
+        anio: 2021,
+        sumaAsegurada: 15000000,
+        cobertura: "Responsabilidad Civil",
+        tasa: 8,
+        vigenciaDesde: "2026-10-15",
+        vigenciaHasta: "2027-10-15",
+        prima: 120000,
+        comision: 8,
+        estado: "Activa"
+    }
+];
