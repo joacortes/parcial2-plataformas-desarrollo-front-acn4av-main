@@ -82,7 +82,11 @@ export default function Polizas() {
         const prima = Number(sumaAsegurada) * coberturaSeleccionada.tasa / 1000 * diasVigencia / 365;
         const primaRedondeada = Math.round(prima);
 
+        const importeComision = primaRedondeada * Number(comision) / 100;
+        const importeComisionRedondeado = Math.round(importeComision);
+
         const numeroPoliza = `POL-${String(polizas.length + 1).padStart(4, "0")}`;
+
     
         const nuevaPoliza = {
     
@@ -115,8 +119,11 @@ export default function Polizas() {
             prima: primaRedondeada,
     
             comision: Number(comision),
+
+            importeComision: importeComisionRedondeado,
     
             estado: "Activa"
+
         };
     
         setPolizas([
@@ -379,6 +386,11 @@ export default function Polizas() {
                                 sumaAsegurada={poliza.sumaAsegurada}
                                 cobertura={poliza.cobertura}
                                 prima={poliza.prima}
+                                tasa={poliza.tasa}
+                                vigenciaDesde={poliza.vigenciaDesde}
+                                vigenciaHasta={poliza.vigenciaHasta}
+                                comision={poliza.comision}
+                                importeComision={poliza.importeComision}
                                 estado={poliza.estado}
                                 anularPoliza={anularPoliza}
                             />
