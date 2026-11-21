@@ -1,6 +1,8 @@
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
 export default function PolizaItem({
+    id,
     numero,
     asegurado,
     ramo,
@@ -11,7 +13,8 @@ export default function PolizaItem({
     sumaAsegurada,
     cobertura,
     prima,
-    estado
+    estado,
+    anularPoliza
 }) {
 
     return (
@@ -53,7 +56,11 @@ export default function PolizaItem({
                 <Card.Text>
                     Estado: {estado}
                 </Card.Text>
-
+                {estado === "Activa" && (
+                    <Button variant="danger" onClick={() => anularPoliza(id)}>
+                        Anular póliza
+                    </Button>
+                )}
             </Card.Body>
         </Card>
     );

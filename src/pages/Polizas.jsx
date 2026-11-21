@@ -136,7 +136,24 @@ export default function Polizas() {
         setComision("");
     };
 
+    const anularPoliza = (id) => {
 
+        const polizasActualizadas = polizas.map(
+            (poliza) => {
+
+                if (poliza.id === id) {
+                    return {
+                        ...poliza,
+                        estado: "Anulada"
+                    };
+                }
+
+                return poliza;
+            }
+        );
+
+        setPolizas(polizasActualizadas);
+    };
 
     return (
         <>
@@ -351,6 +368,7 @@ export default function Polizas() {
                         >
 
                             <PolizaItem
+                                id={poliza.id}
                                 numero={poliza.numero}
                                 asegurado={poliza.asegurado}
                                 ramo={poliza.ramo}
@@ -362,6 +380,7 @@ export default function Polizas() {
                                 cobertura={poliza.cobertura}
                                 prima={poliza.prima}
                                 estado={poliza.estado}
+                                anularPoliza={anularPoliza}
                             />
 
                         </Col>
