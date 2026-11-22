@@ -168,6 +168,13 @@ export default function Polizas() {
         setPolizas(polizasActualizadas);
     };
 
+    const polizasVisibles = usuario.rol === "productor"
+        ? polizas.filter(
+            (poliza) =>
+                poliza.productorId === usuario.id
+        )
+        : polizas;
+
     return (
         <>
             <h1 className="mb-4">
@@ -372,7 +379,7 @@ export default function Polizas() {
             </form>
             <Row>
                 {
-                    polizas.map((poliza) => (
+                    polizasVisibles.map((poliza) => (
 
                         <Col
                             md={6}
