@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from "react";
-import { usuarios } from "../data/usuarios";
+import { createContext, useContext, useEffect, useState } from "react";
+import { usuarios as usuariosIniciales } from "../data/usuarios";
 
 
 const AuthContext = createContext();
@@ -16,7 +16,25 @@ export default function AuthProvider({ children }) {
         return null;
     });
 
+    const [usuarios, setUsuarios] = useState(() => {
+        const usuariosGuardados =
+            localStorage.getItem("usuarios");
+
+        if (usuariosGuardados) {
+            return JSON.parse(usuariosGuardados);
+        }
+
+        return usuariosIniciales;
+    });
+
     const isLogueado = usuario !== null;
+
+    useEffect(() => {
+        localStorage.setItem(
+            "usuarios",
+            JSON.stringify(usuarios)
+        );
+    }, [usuarios]);
 
     const login = (email, password) => {
         const usuarioEncontrado = usuarios.find((usuario) => usuario.email === email && usuario.password === password)
@@ -40,7 +58,7 @@ export default function AuthProvider({ children }) {
     };
 
     return (
-        <AuthContext.Provider value={{ isLogueado, usuario, login, logout}}>
+        <AuthContext.Provider value={{ isLogueado, usuario, usuarios, setUsuarios, login, logout}}>
             {children}
         </AuthContext.Provider>
     );
