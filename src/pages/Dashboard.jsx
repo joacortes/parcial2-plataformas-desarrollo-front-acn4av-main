@@ -11,6 +11,18 @@ export default function Dashboard() {
 
     const { usuario } = useAuth();
 
+    const polizasGuardadas = localStorage.getItem("polizas");
+
+    const polizas = polizasGuardadas
+        ? JSON.parse(polizasGuardadas)
+        : polizasIniciales;
+
+    const polizasDelUsuario = usuario.rol === "productor"
+        ? polizas.filter(
+            (poliza) =>
+                poliza.productorId === usuario.id
+        )
+        : polizas;
 
     const aseguradosGuardados = localStorage.getItem("asegurados");
 
@@ -18,21 +30,16 @@ export default function Dashboard() {
         ? JSON.parse(aseguradosGuardados)
         : aseguradosIniciales;
 
-
-    const polizasGuardadas = localStorage.getItem("polizas");
-
-    const polizas = polizasGuardadas
-        ? JSON.parse(polizasGuardadas)
-        : polizasIniciales;
+    
 
 
-    const polizasActivas = polizas.filter(
+    const polizasActivas = polizasDelUsuario.filter(
         (poliza) =>
             poliza.estado === "Activa"
     );
 
 
-    const polizasAnuladas = polizas.filter(
+    const polizasAnuladas = polizasDelUsuario.filter(
         (poliza) =>
             poliza.estado === "Anulada"
     );
@@ -59,6 +66,7 @@ export default function Dashboard() {
         );
     };
 
+    
 
     return (
         <>

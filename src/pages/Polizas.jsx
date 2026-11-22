@@ -6,6 +6,7 @@ import PolizaItem from "../components/PolizaItem";
 import { polizasIniciales } from "../data/polizas";
 import { aseguradosIniciales } from "../data/asegurados";
 import { coberturas } from "../data/coberturas";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Polizas() {
 
@@ -47,7 +48,8 @@ export default function Polizas() {
     const [vigenciaDesde, setVigenciaDesde] = useState("");
     const [vigenciaHasta, setVigenciaHasta] = useState("");
     const [comision, setComision] = useState("");
-    
+    const { usuario } = useAuth();
+
     const emitirPoliza = (e) => {
 
         e.preventDefault();
@@ -117,9 +119,13 @@ export default function Polizas() {
             vigenciaHasta: vigenciaHasta,
     
             prima: primaRedondeada,
-    
-            comision: Number(comision),
+            
+            productorId: usuario.id,
 
+            productorNombre: usuario.nombre,
+
+            comision: Number(comision),
+        
             importeComision: importeComisionRedondeado,
     
             estado: "Activa"
