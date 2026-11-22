@@ -48,6 +48,7 @@ export default function Polizas() {
     const [vigenciaDesde, setVigenciaDesde] = useState("");
     const [vigenciaHasta, setVigenciaHasta] = useState("");
     const [comision, setComision] = useState("");
+    const [mensaje, setMensaje] = useState("");
     const { usuario } = useAuth();
 
     const emitirPoliza = (e) => {
@@ -75,11 +76,13 @@ export default function Polizas() {
         );
     
         if (diasVigencia <= 0) {
-            alert(
+            setMensaje(
                 "La fecha hasta debe ser posterior a la fecha desde"
             );
             return;
         }
+
+        setMensaje("");
     
         const prima = Number(sumaAsegurada) * coberturaSeleccionada.tasa / 1000 * diasVigencia / 365;
         const primaRedondeada = Math.round(prima);
@@ -181,6 +184,12 @@ export default function Polizas() {
                 Pólizas
             </h1>
             
+            {mensaje && (
+                <div className="alert alert-danger">
+                    {mensaje}
+                </div>
+            )}
+
             <form className="mb-5" onSubmit={emitirPoliza}>
 
                 <h2 className="mb-3">Nueva póliza</h2>

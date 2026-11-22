@@ -17,6 +17,7 @@ export default function Usuarios() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [rol, setRol] = useState("productor");
+    const [mensaje, setMensaje] = useState("");
 
     const agregarUsuario = (e) => {
 
@@ -28,9 +29,11 @@ export default function Usuarios() {
         );
 
         if (existeEmail) {
-            alert("Ya existe un usuario con ese email");
+            setMensaje("Ya existe un usuario con ese email");
             return;
         }
+
+        setMensaje("");
 
         const nuevoUsuario = {
             id: Date.now(),
@@ -54,9 +57,11 @@ export default function Usuarios() {
     const eliminarUsuario = (id) => {
 
         if (usuario.id === id) {
-            alert("No podés eliminar tu propio usuario");
+            setMensaje("No podés eliminar tu propio usuario");
             return;
         }
+
+        setMensaje("");
 
         const usuariosActualizados =
             usuarios.filter(
@@ -74,6 +79,12 @@ export default function Usuarios() {
             <h1 className="mb-4">
                 Usuarios
             </h1>
+
+            {mensaje && (
+                <div className="alert alert-danger">
+                    {mensaje}
+                </div>
+            )}
 
             <form
                 onSubmit={agregarUsuario}

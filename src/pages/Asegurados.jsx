@@ -29,7 +29,7 @@ export default function Asegurados() {
     const [dni, setDni] = useState("");
     const [email, setEmail] = useState("");
     const [telefono, setTelefono] = useState("");
-
+    const [mensaje, setMensaje] = useState("");
     
 
     const agregarAsegurado = (e) => {
@@ -41,9 +41,11 @@ export default function Asegurados() {
         );
 
         if (existeDni) {
-            alert("Ya existe un asegurado con ese DNI");
+            setMensaje("Ya existe un asegurado con ese DNI");
             return;
         }
+
+        setMensaje("");
 
         const nuevoAsegurado = {
             id: Date.now(),
@@ -84,6 +86,11 @@ export default function Asegurados() {
     return (
         <>
             <h1 className="mb-4">Asegurados</h1>
+            {mensaje && (
+                <div className="alert alert-danger">
+                    {mensaje}
+                </div>
+            )}
             <form onSubmit={agregarAsegurado} className="mb-4">
                 <h2>Nuevo asegurado</h2>
 
