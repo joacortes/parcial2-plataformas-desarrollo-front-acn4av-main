@@ -175,27 +175,27 @@ export default function Usuarios() {
 
             <Row>
                 {
-                    usuarios.map((usuarioItem) => (
-
-                        <Col
-                            md={6}
-                            lg={4}
-                            key={usuarioItem.id}
-                        >
-
-                            <UsuarioItem
-                                id={usuarioItem.id}
-                                nombre={usuarioItem.nombre}
-                                email={usuarioItem.email}
-                                rol={usuarioItem.rol}
-                                eliminarUsuario={
-                                    eliminarUsuario
-                                }
-                            />
-
-                        </Col>
-
-                    ))
+                    usuarios.length === 0 ? (
+                        <div className="alert alert-info">
+                            No hay usuarios registrados.
+                        </div>
+                    ) : (
+                        usuarios.map((usuarioItem) => (
+                            <Col
+                                md={6}
+                                lg={4}
+                                key={usuarioItem.id}
+                            >
+                                <UsuarioItem
+                                    id={usuarioItem.id}
+                                    nombre={usuarioItem.nombre}
+                                    email={usuarioItem.email}
+                                    rol={usuarioItem.rol}
+                                    eliminarUsuario={eliminarUsuario}
+                                />
+                            </Col>
+                        ))
+                    )
                 }
 
             </Row>

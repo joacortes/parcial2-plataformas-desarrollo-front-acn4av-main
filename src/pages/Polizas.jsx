@@ -379,38 +379,40 @@ export default function Polizas() {
             </form>
             <Row>
                 {
-                    polizasVisibles.map((poliza) => (
-
-                        <Col
-                            md={6}
-                            lg={4}
-                            key={poliza.id}
-                        >
-
-                            <PolizaItem
-                                id={poliza.id}
-                                numero={poliza.numero}
-                                asegurado={poliza.asegurado}
-                                ramo={poliza.ramo}
-                                patente={poliza.patente}
-                                marca={poliza.marca}
-                                modelo={poliza.modelo}
-                                anio={poliza.anio}
-                                sumaAsegurada={poliza.sumaAsegurada}
-                                cobertura={poliza.cobertura}
-                                prima={poliza.prima}
-                                tasa={poliza.tasa}
-                                vigenciaDesde={poliza.vigenciaDesde}
-                                vigenciaHasta={poliza.vigenciaHasta}
-                                comision={poliza.comision}
-                                importeComision={poliza.importeComision}
-                                estado={poliza.estado}
-                                anularPoliza={anularPoliza}
-                            />
-
-                        </Col>
-
-                    ))
+                    polizasVisibles.length === 0 ? (
+                        <div className="alert alert-info">
+                            No hay pólizas emitidas para mostrar.
+                        </div>
+                    ) : (
+                        polizasVisibles.map((poliza) => (
+                            <Col
+                                md={6}
+                                lg={4}
+                                key={poliza.id}
+                            >
+                                <PolizaItem
+                                    id={poliza.id}
+                                    numero={poliza.numero}
+                                    asegurado={poliza.asegurado}
+                                    ramo={poliza.ramo}
+                                    patente={poliza.patente}
+                                    marca={poliza.marca}
+                                    modelo={poliza.modelo}
+                                    anio={poliza.anio}
+                                    sumaAsegurada={poliza.sumaAsegurada}
+                                    cobertura={poliza.cobertura}
+                                    tasa={poliza.tasa}
+                                    vigenciaDesde={poliza.vigenciaDesde}
+                                    vigenciaHasta={poliza.vigenciaHasta}
+                                    prima={poliza.prima}
+                                    comision={poliza.comision}
+                                    importeComision={poliza.importeComision}
+                                    estado={poliza.estado}
+                                    anularPoliza={anularPoliza}
+                                />
+                            </Col>
+                        ))
+                    )
                 }
             </Row>
         </>

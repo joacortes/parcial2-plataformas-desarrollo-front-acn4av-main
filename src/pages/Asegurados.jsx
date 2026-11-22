@@ -113,11 +113,28 @@ export default function Asegurados() {
 
             <Row>
                 {
-                    asegurados.map((asegurado) => (
-                        <Col md={6} lg={4} key={asegurado.id}>
-                            <AseguradoItem id={asegurado.id} nombre={asegurado.nombre} dni={asegurado.dni} email={asegurado.email} telefono={asegurado.telefono} eliminarAsegurado={eliminarAsegurado}/>
-                        </Col>
-                    ))
+                    asegurados.length === 0 ? (
+                        <div className="alert alert-info">
+                            No hay asegurados registrados.
+                        </div>
+                    ) : (
+                        asegurados.map((asegurado) => (
+                            <Col
+                                md={6}
+                                lg={4}
+                                key={asegurado.id}
+                            >
+                                <AseguradoItem
+                                    id={asegurado.id}
+                                    nombre={asegurado.nombre}
+                                    dni={asegurado.dni}
+                                    email={asegurado.email}
+                                    telefono={asegurado.telefono}
+                                    eliminarAsegurado={eliminarAsegurado}
+                                />
+                            </Col>
+                        ))
+                    )
                 }
             </Row>
         </>
